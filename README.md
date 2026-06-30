@@ -19,3 +19,13 @@ brew install athal7/tap/opencode-cmd
 ```
 
 See the [opencode-cmd repo](https://github.com/athal7/opencode-cmd) for full documentation.
+
+### opencode-pilot
+
+Automation daemon for OpenCode - polls GitHub/Linear issues and spawns agent sessions.
+
+```sh
+brew install athal7/tap/opencode-pilot
+```
+
+See the [opencode-pilot repo](https://github.com/athal7/opencode-pilot) for configuration and docs.
