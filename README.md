@@ -29,3 +29,13 @@ brew install athal7/tap/opencode-pilot
 ```
 
 See the [opencode-pilot repo](https://github.com/athal7/opencode-pilot) for configuration and docs.
+
+### git-worktree-sync
+
+Auto fast-forward default branches in git worktree repos.
+
+```sh
+brew install athal7/tap/git-worktree-sync
+```
+
+See the [git-worktree-sync repo](https://github.com/athal7/git-worktree-sync) for configuration and docs.
