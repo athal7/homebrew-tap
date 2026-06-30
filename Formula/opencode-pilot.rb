@@ -28,12 +28,14 @@ class OpencodePilot < Formula
       To start the service:
         brew services start opencode-pilot
 
-      To view logs:
-        tail -f #{var}/log/opencode-pilot.log
+      To check status:
+        opencode-pilot status
+
+      Note: Requires OpenCode to be running for session creation.
     EOS
   end
 
   test do
-    assert_match "Usage", shell_output("#{bin}/opencode-pilot --help 2>&1", 1)
+    assert_match "Usage:", shell_output("#{bin}/opencode-pilot help")
   end
 end
