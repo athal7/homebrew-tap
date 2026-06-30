@@ -39,3 +39,13 @@ brew install athal7/tap/git-worktree-sync
 ```
 
 See the [git-worktree-sync repo](https://github.com/athal7/git-worktree-sync) for configuration and docs.
+
+### launchd-yaml
+
+Declarative macOS LaunchAgent management from a YAML file.
+
+```sh
+brew install athal7/tap/launchd-yaml
+```
+
+See the [launchd-yaml repo](https://github.com/athal7/launchd-yaml) for the YAML format and docs.
