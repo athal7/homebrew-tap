@@ -49,3 +49,13 @@ brew install athal7/tap/launchd-yaml
 ```
 
 See the [launchd-yaml repo](https://github.com/athal7/launchd-yaml) for the YAML format and docs.
+
+### kb
+
+Textual TUI to browse and manage a personal knowledge base.
+
+```sh
+brew install athal7/tap/kb
+```
+
+See the [kb repo](https://github.com/athal7/kb) for full documentation.
