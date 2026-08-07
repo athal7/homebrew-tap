@@ -1,8 +1,8 @@
 class LaunchdYaml < Formula
   desc "Declarative macOS LaunchAgent management from a YAML file"
   homepage "https://github.com/athal7/launchd-yaml"
-  url "https://github.com/athal7/launchd-yaml/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "1c0f2a840e7115eb9bcc7eafc1924cfdd5a1e74ba525c5ad2bf113a8a18f8b2d"
+  url "https://github.com/athal7/launchd-yaml/archive/refs/tags/v1.0.1.tar.gz"
+  sha256 "d0a5a0217e7fc6b395d54231ba78822a1607fae5423d639810703e66798ce527"
   license "MIT"
 
   depends_on "yq"
