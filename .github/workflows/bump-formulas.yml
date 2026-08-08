@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        formula: [git-worktree-sync, launchd-yaml, opencode-cmd, opencode-pilot]
+        formula: [agentcfg, git-worktree-sync, launchd-yaml, opencode-cmd, opencode-pilot]
     steps:
       - uses: actions/checkout@v4
 
