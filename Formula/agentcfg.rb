@@ -1,8 +1,8 @@
 class Agentcfg < Formula
   desc "Registry-driven config generator for opencode and omp agent harnesses"
   homepage "https://github.com/athal7/agentcfg"
-  url "https://github.com/athal7/agentcfg/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "ca6da9f4b136155f77c9425b5be171b4a2bb8d08fcb05d2ac95280fc630b5053"
+  url "https://github.com/athal7/agentcfg/archive/refs/tags/v0.4.2.tar.gz"
+  sha256 "dba51daaba67211aec65254ff43c4d86c1aca05731a2b88e38a8a31f554dff02"
   license "MIT"
 
   depends_on "go" => :build
