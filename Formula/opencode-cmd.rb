@@ -1,8 +1,8 @@
 class OpencodeCmd < Formula
   desc "Shell CLI for the OpenCode HTTP API"
   homepage "https://github.com/athal7/opencode-cmd"
-  url "https://github.com/athal7/opencode-cmd/archive/refs/tags/v1.0.1.tar.gz"
-  sha256 "1b0261a5011f2b5ffa4fb732a68a2bb79d1558dcb29cec274b5b7dbff5fc9ec6"
+  url "https://github.com/athal7/opencode-cmd/archive/refs/tags/v1.0.2.tar.gz"
+  sha256 "0daf8ccdfb0d23ff78ff3703a1b5f8412fbd428fd1df510d91d23f9382764f31"
   license "MIT"
 
   depends_on "jq"
