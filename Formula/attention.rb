@@ -9,12 +9,12 @@ class Attention < Formula
   depends_on "python@3.14"
 
   def install
-    # `sources/` (the bundled plugins) must live alongside the `attention`
-    # script at runtime -- it resolves plugins relative to its own resolved
-    # file path. libexec + a symlink into bin keeps that relationship intact
-    # (a symlink's target still resolves correctly), rather than bin.install
-    # dropping just the one file with no sibling directory.
-    libexec.install "attention", "sources"
+    # `sources/` (the bundled plugins) and `dashboard.py` must live alongside
+    # the `attention` script at runtime -- it resolves both relative to its
+    # own resolved file path. libexec + a symlink into bin keeps that
+    # relationship intact (a symlink's target still resolves correctly),
+    # rather than bin.install dropping just the one file with no siblings.
+    libexec.install "attention", "dashboard.py", "sources"
     bin.install_symlink libexec/"attention"
   end
 
