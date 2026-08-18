@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        formula: [agentcfg, attention, git-worktree-sync, launchd-yaml, opencode-cmd, opencode-pilot]
+        formula: [agentcfg, attention, git-worktree-sync, kb, launchd-yaml, opencode-cmd, opencode-pilot]
     steps:
       - uses: actions/checkout@v4
 
@@ -62,88 +62,3 @@ jobs:
         env:
           COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  kb:
-    runs-on: macos-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Discover latest kb tag
-        id: latest
-        run: |
-          tag=$(git ls-remote --tags --refs "https://github.com/athal7/kb" \
-            | sed 's#.*refs/tags/##' \
-            | sort -V | tail -1)
-          echo "tag=$tag" >> "$GITHUB_OUTPUT"
-
-      - name: Read currently pinned tag
-        id: current
-        run: |
-          current=$(grep -oE '/tags/v[^"]+\.tar\.gz' Formula/kb.rb | head -1 | sed -E 's#/tags/(.*)\.tar\.gz#\1#')
-          echo "tag=$current" >> "$GITHUB_OUTPUT"
-
-      - name: Compare tags
-        id: check
-        env:
-          LATEST: ${{ steps.latest.outputs.tag }}
-          CURRENT: ${{ steps.current.outputs.tag }}
-        run: |
-          if [ "$LATEST" = "$CURRENT" ]; then
-            echo "No change for kb (still $CURRENT); nothing to do"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "kb: $CURRENT -> $LATEST"
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Compute new tarball sha256
-        if: steps.check.outputs.changed == 'true'
-        id: sha
-        env:
-          TAG: ${{ steps.latest.outputs.tag }}
-        run: |
-          sha=$(curl -sL "https://github.com/athal7/kb/archive/refs/tags/$TAG.tar.gz" | shasum -a 256 | awk '{print $1}')
-          echo "sha256=$sha" >> "$GITHUB_OUTPUT"
-
-      - name: Rewrite kb.rb's url/sha256 (first occurrence only)
-        if: steps.check.outputs.changed == 'true'
-        env:
-          TAG: ${{ steps.latest.outputs.tag }}
-          SHA256: ${{ steps.sha.outputs.sha256 }}
-        run: |
-          ruby -e '
-            path = "Formula/kb.rb"
-            tag = ENV.fetch("TAG")
-            sha = ENV.fetch("SHA256")
-            content = File.read(path)
-            content = content.sub(/url "https:\/\/github\.com\/athal7\/kb\/archive\/refs\/tags\/v[^"]+\.tar\.gz"/,
-                                   %(url "https://github.com/athal7/kb/archive/refs/tags/#{tag}.tar.gz"))
-            content = content.sub(/sha256 "[a-f0-9]{64}"/,
-                                   %(sha256 "#{sha}"))
-            File.write(path, content)
-          '
-
-      - name: Link this checkout as the athal7/tap Homebrew tap
-        if: steps.check.outputs.changed == 'true'
-        run: |
-          brew_repo=$(brew --repository)
-          mkdir -p "$brew_repo/Library/Taps/athal7"
-          ln -sfn "$GITHUB_WORKSPACE" "$brew_repo/Library/Taps/athal7/homebrew-tap"
-
-      - name: Build and test kb from the bumped formula
-        if: steps.check.outputs.changed == 'true'
-        run: |
-          brew install --build-from-source athal7/tap/kb
-          brew test athal7/tap/kb
-
-      - name: Commit and push
-        if: steps.check.outputs.changed == 'true'
-        env:
-          TAG: ${{ steps.latest.outputs.tag }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Formula/kb.rb
-          git commit -m "kb $TAG"
-          git push
