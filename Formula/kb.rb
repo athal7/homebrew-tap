@@ -3,8 +3,8 @@ class Kb < Formula
 
   desc "Textual TUI to browse and manage a personal knowledge base"
   homepage "https://github.com/athal7/kb"
-  url "https://github.com/athal7/kb/archive/refs/tags/v0.4.0.tar.gz"
-  sha256 "18e902d2389715d1d0bfb96a601e54a9c19a529ccb52453d55c283d4c9fa1a26"
+  url "https://github.com/athal7/kb/archive/refs/tags/v0.5.0.tar.gz"
+  sha256 "c2fd91d58a1af664ae7f633841f4769e8298a013cf98dee143926c44808d8bf2"
   license "MIT"
 
   depends_on "maturin" => :build
