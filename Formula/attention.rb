@@ -5,7 +5,6 @@ class Attention < Formula
   sha256 "2ffba7a0b110a3856850d2bcb84810733d26ea116e37ce70b48346bde05231d3"
   license "MIT"
 
-  depends_on "fzf"
   depends_on "python@3.14"
 
   def install
