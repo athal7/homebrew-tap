@@ -14,13 +14,16 @@ jobs:
       fail-fast: false
       matrix:
         formula: [agentcfg, attention, git-worktree-sync, kb, launchd-yaml, opencode-cmd, opencode-pilot]
+        include:
+          - formula: cal-automation
+            repo: cal
     steps:
       - uses: actions/checkout@v4
 
       - name: Discover latest upstream tag
         id: latest
         env:
-          REPO: ${{ matrix.formula }}
+          REPO: ${{ matrix.repo || matrix.formula }}
         run: |
           tag=$(git ls-remote --tags --refs "https://github.com/athal7/$REPO" \
             | sed 's#.*refs/tags/##' \
@@ -58,7 +61,6 @@ jobs:
           formula-path: Formula/${{ matrix.formula }}.rb
           homebrew-tap: athal7/homebrew-tap
           tag-name: ${{ steps.latest.outputs.tag }}
-          download-url: https://github.com/athal7/${{ matrix.formula }}/archive/refs/tags/${{ steps.latest.outputs.tag }}.tar.gz
+          download-url: https://github.com/athal7/${{ matrix.repo || matrix.formula }}/archive/refs/tags/${{ steps.latest.outputs.tag }}.tar.gz
         env:
           COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
