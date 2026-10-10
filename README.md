@@ -30,6 +30,16 @@ brew install athal7/tap/agentcfg
 
 See the [agentcfg repo](https://github.com/athal7/agentcfg) for full documentation.
 
+### cal-automation
+
+Calendar sync, family events, lunch guard, and babysitter checks.
+
+```sh
+brew install athal7/tap/cal-automation
+```
+
+See the [cal repo](https://github.com/athal7/cal) for full documentation.
+
 ### git-worktree-sync
 
 Auto fast-forward default branches in git worktree repos.
