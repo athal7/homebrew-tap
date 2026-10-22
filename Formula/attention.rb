@@ -1,8 +1,8 @@
 class Attention < Formula
   desc "Prioritized triage dashboard for calendar, reminders, GitHub, and Linear"
   homepage "https://github.com/athal7/attention"
-  url "https://github.com/athal7/attention/archive/refs/tags/v3.18.0.tar.gz"
-  sha256 "9a315e8c45f1ef7a05de5b56abc623487f94da2996c7dd15d763f24d83388b88"
+  url "https://github.com/athal7/attention/archive/refs/tags/v3.19.0.tar.gz"
+  sha256 "781910c4341e17877dc6b580f7356e0ab0e852c7da311d8480c999fc530b8e18"
   license "MIT"
 
   depends_on "python@3.14"
