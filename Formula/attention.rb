@@ -39,7 +39,12 @@ class Attention < Formula
     interval 900
     keep_alive false
     environment_variables PATH: std_service_path_env
-    log_path var/"log/attention.log"
+    # The run's stdout is the row table, including each row's encoded
+    # actions: a measured 1.06 MB per tick, so ~100 MB a day at this
+    # interval, for output nothing reads -- `attention` on the command line
+    # already prints it on demand. Discard it and keep stderr, which is
+    # where a rule that cannot dispatch a session actually reports.
+    log_path "/dev/null"
     error_log_path var/"log/attention.error.log"
   end
 
