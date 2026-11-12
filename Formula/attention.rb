@@ -38,7 +38,11 @@ class Attention < Formula
     run_type :interval
     interval 900
     keep_alive false
-    environment_variables PATH: std_service_path_env
+    # std_service_path_env covers the Homebrew prefix only; the
+    # `attention-session` helper a session action usually calls lives
+    # in the user's ~/.local/bin, so add it or every automated session
+    # fails with ENOENT in the error log.
+    environment_variables PATH: "#{Dir.home}/.local/bin:#{std_service_path_env}"
     # The run's stdout is the row table, including each row's encoded
     # actions: a measured 1.06 MB per tick, so ~100 MB a day at this
     # interval, for output nothing reads -- `attention` on the command line
